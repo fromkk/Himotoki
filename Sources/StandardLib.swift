@@ -44,7 +44,7 @@ extension Bool: Decodable {
 
 // MARK: - Extensions
 
-extension CollectionType where Generator.Element: Decodable {
+extension Collection where Iterator.Element: Decodable {
     /// - Throws: DecodeError or an arbitrary ErrorType
     public static func decode(JSON: AnyJSON) throws -> [Generator.Element] {
         guard let array = JSON as? [AnyJSON] else {
@@ -55,7 +55,7 @@ extension CollectionType where Generator.Element: Decodable {
     }
 
     /// - Throws: DecodeError or an arbitrary ErrorType
-    public static func decode(JSON: AnyJSON, rootKeyPath: KeyPath) throws -> [Generator.Element] {
+    public static func decode(JSON: AnyJSON, rootKeyPath: KeyPath) throws -> [Iterator.Element] {
         return try Extractor(JSON).array(rootKeyPath)
     }
 }
